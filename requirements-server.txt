@@ -1,0 +1,8 @@
+# Servidor de Qwen3-VL-8B (entorno virtual aparte) y backend:=local.
+# Qwen3-VL requiere transformers >= 4.57.
+torch
+transformers>=4.57
+accelerate
+bitsandbytes
+huggingface_hub
+Pillow

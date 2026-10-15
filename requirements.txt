@@ -1,0 +1,5 @@
+# Cliente / nodo ROS (backend:=server). No necesita torch ni pesos.
+# (opencv, numpy y Pillow normalmente ya vienen de rosdep; ver package.xml)
+Pillow
+numpy
+opencv-python

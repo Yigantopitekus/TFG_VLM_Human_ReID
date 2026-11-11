@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>human_reid_ros</name>
+  <version>0.1.0</version>
+  <description>Re-identificación de personas con un VLM (Qwen3-VL) en ROS 2: servicio de inferencia, nodo ReID y detector de personas con YOLO.</description>
+  <maintainer email="tu_email@example.com">tu_nombre</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Generación de la interfaz VlmInference.srv -->
+  <build_depend>rosidl_default_generators</build_depend>
+  <depend>sensor_msgs</depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+  <!-- Solo en ejecución (los nodos son Python, no se compila nada más) -->
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
+  <exec_depend>message_filters</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-pil</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+
+  <!-- NOTA: torch, transformers, accelerate, bitsandbytes y ultralytics NO son
+       claves de rosdep; se instalan con `pip install -r requirements.txt`. -->
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,15 @@
+# Dependencias Python de ejecución (pip). Las de ROS (rclpy, cv_bridge, ...) vienen de apt/rosdep.
+
+# --- VLM (qwen3vl_service_node) ---
+torch
+torchvision
+transformers>=4.57.0   # primera versión con Qwen3-VL
+accelerate             # necesario para device_map="auto"
+bitsandbytes           # necesario para la cuantización a 4 bits (BitsAndBytesConfig)
+Pillow
+
+# --- Detector de personas (person_detector) ---
+ultralytics            # YOLOv8
+
+# --- Común ---
+numpy<2                # cv_bridge e interfaces ROS 2 se compilan contra numpy 1.x

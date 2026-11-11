@@ -1,0 +1,15 @@
+# Parámetros del backend Qwen3-VL. Las claves son los nombres de nodo que usa reid.launch.py
+# (<modelo>_service_node y <modelo>_reid_node).
+qwen3vl_service_node:
+  ros__parameters:
+    model_id: "Qwen/Qwen3-VL-8B-Instruct"
+    cache_dir: "/opt/data"
+    max_new_tokens: 512
+    max_image_side: 1280
+
+qwen3vl_reid_node:
+  ros__parameters:
+    reference_topic: "/human_reid/reference"
+    query_topic: "/human_reid/crowd"
+    max_references: 2
+    default_scene_images: 1   # solo si el publicador no indica cuántas imágenes tiene la escena

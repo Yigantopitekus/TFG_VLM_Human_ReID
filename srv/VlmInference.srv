@@ -1,0 +1,10 @@
+# Recortes de la persona objetivo (se envían al modelo primero)
+sensor_msgs/Image[] references
+# Vistas de la escena donde buscarla (se envían después de las referencias)
+sensor_msgs/Image[] scene
+# Texto de la consulta
+string prompt
+---
+bool success
+# Respuesta del modelo, o el mensaje de error si success == false
+string response

@@ -4,7 +4,7 @@ Paquete ROS 2 (`human_reid_ros`) que utiliza un modelo visión-lenguaje (VLM) pa
 
 El paquete incluye además herramientas auxiliares independientes del modelo: un **detector de personas** (YOLOv8, dos cámaras) que genera los recortes de referencia, y un **publicador interactivo** que envía referencias y escenas desde disco al sistema ReID.
 
-> Estado: trabajo en curso (TFG). El flujo completo funciona con imágenes de disco. El detector de personas guarda recortes en disco y todavía no publica directamente al nodo ReID (ver [Hoja de ruta](#hoja-de-ruta)).
+> Estado: trabajo en curso (TFG). El flujo completo funciona con imágenes de disco. El detector de personas guarda recortes en disco y todavía no publica directamente al nodo ReID.
 
 ---
 
@@ -18,8 +18,7 @@ El paquete incluye además herramientas auxiliares independientes del modelo: un
 6. [Ejecución](#ejecución)
 7. [Parámetros](#parámetros)
 8. [Añadir otro modelo](#añadir-otro-modelo)
-9. [Solución de problemas](#solución-de-problemas)
-10. [Licencia y autoría](#licencia-y-autoría)
+9. [Licencia y autoría](#licencia-y-autoría)
 
 ---
 
@@ -351,8 +350,8 @@ Sube `max_new_tokens` en `config/qwen3vl.yaml`.
 # Ejemplo
 
 ## Fotos de referencia
-<img width="189" height="545" alt="paciente18_cam1" src="https://github.com/user-attachments/assets/f622dcbc-89ed-48c8-9df8-f26322742f5a" />
-<img width="95" height="223" alt="paciente18_cam2" src="https://github.com/user-attachments/assets/1de5ba7e-5fa0-46d9-bbfa-0cd71475e03a" />
+<img width="95" height="230" alt="paciente13_cam2" src="https://github.com/user-attachments/assets/ca6bdcaa-bd09-4d7c-8de7-e1437be6a406" />
+<img width="255" height="624" alt="paciente13_cam1" src="https://github.com/user-attachments/assets/ca7dc479-0938-47b9-abc2-5fd97b892cf3" />
 
 ## Fotos de la sala entera
 <img width="1280" height="720" alt="frame_s33__oak_rgb_image_raw" src="https://github.com/user-attachments/assets/9af81da8-36bb-4d89-9b2b-a0a831d34d2e" />
@@ -360,17 +359,29 @@ Sube `max_new_tokens` en `config/qwen3vl.yaml`.
 
 ## Output
 ```bash
-[qwen3vl_reid_node.py-2] [INFO] [1794419551.736282906] [qwen3vl_reid_node]: ¡Servicio enlazado correctamente!
-[qwen3vl_reid_node.py-2] [INFO] [1794419551.741050214] [qwen3vl_reid_node]: Nodo ReID listo. Carga imágenes y lanza la consulta con 'ask'.
-[qwen3vl_reid_node.py-2] [INFO] [1794419585.921028146] [qwen3vl_reid_node]: Referencias de 'paciente18': 1
-[qwen3vl_reid_node.py-2] [INFO] [1794419586.418369154] [qwen3vl_reid_node]: Referencias de 'paciente18': 2
-[qwen3vl_reid_node.py-2] [INFO] [1794419594.193283914] [qwen3vl_reid_node]: Escena: 1/2 imágenes cargadas.
-[qwen3vl_reid_node.py-2] [INFO] [1794419594.406424883] [qwen3vl_reid_node]: Escena: 2/2 imágenes cargadas.
-[qwen3vl_reid_node.py-2] [INFO] [1794419609.094587345] [qwen3vl_reid_node]: Consultando al VLM: paciente 'paciente18' (2 ref.) + escena (2 img.), prompt por defecto...
-[qwen3vl_reid_node.py-2] [INFO] [1794419612.556065086] [qwen3vl_reid_node]: ReID [paciente18]:
-[qwen3vl_reid_node.py-2] 1. Lleva sudadera oscura con cuello redondo, pantalones grises claros, y tiene cabello oscuro y rizado, visto desde atrás en ambas imágenes.  
-[qwen3vl_reid_node.py-2] 2. Aparece en Picture 4, sentado en primer plano, a la izquierda de la imagen, con la cabeza inclinada hacia adelante sonriendo.  
-[qwen3vl_reid_node.py-2] 3. VEREDICTO: SÍ, en Picture 4, en la esquina inferior izquierda, sentado frente a la cámara.
+[qwen3vl_service_node.py-1] [INFO] [1794423385.802342908] [qwen3vl_service_node]: Servidor VLM activo (servicio 'vlm_inference').
+[qwen3vl_reid_node.py-2] [INFO] [1794423385.805235218] [qwen3vl_reid_node]: ¡Servicio enlazado correctamente!
+[qwen3vl_reid_node.py-2] [INFO] [1794423385.811137073] [qwen3vl_reid_node]: Nodo ReID listo. Carga imágenes y lanza la consulta con 'ask'.
+<img width="255" height="624" alt="paciente13_cam1" src="https://github.com/user-attachments/assets/01a51d1b-043e-4349-ba5d-c96f6364038b" />
+[qwen3vl_reid_node.py-2] [INFO] [1794423402.426789630] [qwen3vl_reid_node]: Referencias de 'paciente13': 1
+[qwen3vl_reid_node.py-2] [INFO] [1794423402.922519897] [qwen3vl_reid_node]: Referencias de 'paciente13': 2
+[qwen3vl_reid_node.py-2] [INFO] [1794423405.247988593] [qwen3vl_reid_node]: Escena: 1/2 imágenes cargadas.
+[qwen3vl_reid_node.py-2] [INFO] [1794423405.457297748] [qwen3vl_reid_node]: Escena: 2/2 imágenes cargadas.
+[qwen3vl_reid_node.py-2] [INFO] [1794423412.106456536] [qwen3vl_reid_node]: Consultando al VLM: paciente 'paciente13' (2 ref.) + escena (2 img.), prompt por defecto...
+[qwen3vl_reid_node.py-2] [INFO] [1794423423.195919587] [qwen3vl_reid_node]: ReID [paciente13]:
+[qwen3vl_reid_node.py-2] **Veredicto: SI**
+[qwen3vl_reid_node.py-2] 
+[qwen3vl_reid_node.py-2] **Justificación:**
+[qwen3vl_reid_node.py-2] La persona objetivo en las imágenes de referencia (Picture 1 y 2) es un hombre visto de espaldas, con cabello corto y oscuro, vistiendo una camisa de color rosa intenso (o coral) y pantalones blancos o de color claro. En Picture 1, se observa que está de pie, ligeramente inclinado hacia adelante, frente a una mesa o consola con un control rojo. En Picture 2, la postura es más erguida, y se ve que lleva una camisa de manga larga con cuello redondo y pantalones de corte recto.
+[qwen3vl_reid_node.py-2] 
+[qwen3vl_reid_node.py-2] Al analizar las imágenes de escena (Picture 3 y 4), se observa que en ambas, el mismo hombre (con la misma camisa rosa y pantalones claros) está sentado en el sofá, a la derecha del centro, junto a otros jóvenes. En Picture 4, su posición es claramente identificable: está sentado en el sofá, al lado de una mujer con camisa beige y una mujer con camisa azul, y frente a una televisión. Su postura es sentada, en contraste con las imágenes de referencia donde está de pie, pero el vestuario y la apariencia física coinciden exactamente.
+[qwen3vl_reid_node.py-2] 
+[qwen3vl_reid_node.py-2] Aunque el contexto cambia (de pie frente a una consola vs. sentado en un sofá), las características visuales (vestuario, peinado, postura general) son consistentes. La persona objetivo aparece en la escena en Picture 4 (y también en Picture 3, aunque menos visible). Por lo tanto, se confirma su presencia en la escena.
+[qwen3vl_reid_node.py-2] 
+[qwen3vl_reid_node.py-2] **Posición en la sala (2D):** En Picture 4, la persona está ubicada en la parte derecha del sofá, en la posición de la cuarta persona contando desde la izquierda (o la tercera contando desde la derecha), sentada. En Picture 3, está en la misma posición, aunque la imagen es más borrosa.
+[qwen3vl_reid_node.py-2] 
+[qwen3vl_reid_node.py-2] **Conclusión:** La persona objetivo está presente en la escena, en la posición descrita. Veredicto: SI.
+
 
 
 ```

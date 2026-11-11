@@ -311,42 +311,6 @@ Notas de diseño:
 
 ---
 
-## Solución de problemas
-
-**`ros2 run human_reid_ros person_detector.py` → "No executable found"**
-1. Comprueba el bit de ejecución del fichero fuente: `ls -l human_reid_ros/person_detector.py` debe mostrar `-rwxr-xr-x`. Con `--symlink-install`, el ejecutable instalado es un enlace al fichero original y `ros2 run` solo lista ficheros ejecutables.
-2. Comprueba lo instalado: `ls -l install/human_reid_ros/lib/human_reid_ros/`.
-3. Recompila limpio: `rm -rf build/human_reid_ros install/human_reid_ros && colcon build --packages-select human_reid_ros --symlink-install` y vuelve a hacer `source install/setup.bash`.
-4. Recuerda el nombre completo: el ejecutable se llama `person_detector.py` (con extensión).
-
-**`launch` → "Modelo 'x' desconocido"**
-Solo hay modelos para los que exista `config/<modelo>.yaml` *instalado*. Tras añadir un YAML, recompila y haz `source install/setup.bash`.
-
-**`'Qwen3VLEngine' object has no attribute 'infer'`**
-Casi siempre es una copia instalada desactualizada (compilaste sin `--symlink-install` y editaste después) o un problema de indentación del fichero. Recompila y comprueba:
-```bash
-python3 -c "from human_reid_ros.qwen3vl.qwen3vl_engine import Qwen3VLEngine as E; print(hasattr(E,'infer'))"
-```
-
-**`AttributeError` al asignar `req.references` / `ImportError: cannot import name 'VlmInference'`**
-El nodo está viendo una definición antigua del `.srv` o no se ha compilado. Recompila, `source install/setup.bash` en todas las terminales y comprueba con `ros2 interface show human_reid_ros/srv/VlmInference`.
-
-**`image_publisher`: "Ningún suscriptor en /human_reid/..."**
-El nodo ReID solo se suscribe cuando el servicio del modelo ya está activo. Espera a ver `Nodo ReID listo` en el log del launcher (la primera ejecución puede tardar por la descarga de pesos) y reintenta.
-
-**`ModuleNotFoundError: ultralytics` / `bitsandbytes`**
-Instala `requirements.txt` en el mismo entorno de Python con el que se lanza el nodo.
-
-**`person_detector` no recibe frames**
-Los drivers de cámara suelen publicar con QoS `BEST_EFFORT`; un suscriptor `RELIABLE` no conecta. Comprueba con `ros2 topic info -v /image_raw`. Comprueba también que ambas cámaras tienen `header.stamp` coherentes (la sincronización admite 0,1 s de diferencia).
-
-**`CUDA out of memory` o inferencia muy lenta**
-Las fotos de alta resolución generan miles de tokens visuales cada una. Baja `max_image_side` (p. ej. a 768–1024), reduce `max_references` o publica menos imágenes de escena.
-
-**La respuesta se corta antes del `VEREDICTO`**
-Sube `max_new_tokens` en `config/qwen3vl.yaml`.
-
----
 # Ejemplo
 
 ## Fotos de referencia
@@ -362,7 +326,6 @@ Sube `max_new_tokens` en `config/qwen3vl.yaml`.
 [qwen3vl_service_node.py-1] [INFO] [1794423385.802342908] [qwen3vl_service_node]: Servidor VLM activo (servicio 'vlm_inference').
 [qwen3vl_reid_node.py-2] [INFO] [1794423385.805235218] [qwen3vl_reid_node]: ¡Servicio enlazado correctamente!
 [qwen3vl_reid_node.py-2] [INFO] [1794423385.811137073] [qwen3vl_reid_node]: Nodo ReID listo. Carga imágenes y lanza la consulta con 'ask'.
-<img width="255" height="624" alt="paciente13_cam1" src="https://github.com/user-attachments/assets/01a51d1b-043e-4349-ba5d-c96f6364038b" />
 [qwen3vl_reid_node.py-2] [INFO] [1794423402.426789630] [qwen3vl_reid_node]: Referencias de 'paciente13': 1
 [qwen3vl_reid_node.py-2] [INFO] [1794423402.922519897] [qwen3vl_reid_node]: Referencias de 'paciente13': 2
 [qwen3vl_reid_node.py-2] [INFO] [1794423405.247988593] [qwen3vl_reid_node]: Escena: 1/2 imágenes cargadas.

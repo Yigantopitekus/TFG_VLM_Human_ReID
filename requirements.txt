@@ -1,6 +1,0 @@
-torch
-torchvision
-transformers
-qwen-vl-utils
-opencv-python
-Pillow

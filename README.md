@@ -136,7 +136,7 @@ El servicio rechaza peticiones sin al menos una imagen de referencia y una de es
 
 ## Requisitos
 
-- Ubuntu con **ROS 2** (Humble o superior; ajusta según tu distro) y `colcon`.
+- Ubuntu con **ROS 2** (Jazzy) y `colcon`.
 - GPU NVIDIA con CUDA. El modelo 8B en 4 bits necesita bastante VRAM porque cada imagen consume muchos tokens visuales; reduce `max_image_side` o el número de imágenes si te quedas sin memoria.
 - Espacio en disco para los pesos (~17 GB de descarga la primera vez) en `cache_dir` (por defecto `/opt/data`).
 - Cámaras (solo para `person_detector`): una OAK (`/oak/rgb/image_raw`) y una cámara USB (`/image_raw`).

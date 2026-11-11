@@ -348,7 +348,32 @@ Las fotos de alta resolución generan miles de tokens visuales cada una. Baja `m
 Sube `max_new_tokens` en `config/qwen3vl.yaml`.
 
 ---
+# Ejemplo
 
+## Fotos de referencia
+<img width="189" height="545" alt="paciente18_cam1" src="https://github.com/user-attachments/assets/f622dcbc-89ed-48c8-9df8-f26322742f5a" />
+<img width="95" height="223" alt="paciente18_cam2" src="https://github.com/user-attachments/assets/1de5ba7e-5fa0-46d9-bbfa-0cd71475e03a" />
+
+## Fotos de la sala entera
+<img width="1280" height="720" alt="frame_s33__oak_rgb_image_raw" src="https://github.com/user-attachments/assets/9af81da8-36bb-4d89-9b2b-a0a831d34d2e" />
+<img width="640" height="480" alt="frame_s33__image_raw" src="https://github.com/user-attachments/assets/bcb884b8-4e77-44bb-ad66-e3d7499978e0" />
+
+## Output
+```bash
+[qwen3vl_reid_node.py-2] [INFO] [1794419551.736282906] [qwen3vl_reid_node]: ¡Servicio enlazado correctamente!
+[qwen3vl_reid_node.py-2] [INFO] [1794419551.741050214] [qwen3vl_reid_node]: Nodo ReID listo. Carga imágenes y lanza la consulta con 'ask'.
+[qwen3vl_reid_node.py-2] [INFO] [1794419585.921028146] [qwen3vl_reid_node]: Referencias de 'paciente18': 1
+[qwen3vl_reid_node.py-2] [INFO] [1794419586.418369154] [qwen3vl_reid_node]: Referencias de 'paciente18': 2
+[qwen3vl_reid_node.py-2] [INFO] [1794419594.193283914] [qwen3vl_reid_node]: Escena: 1/2 imágenes cargadas.
+[qwen3vl_reid_node.py-2] [INFO] [1794419594.406424883] [qwen3vl_reid_node]: Escena: 2/2 imágenes cargadas.
+[qwen3vl_reid_node.py-2] [INFO] [1794419609.094587345] [qwen3vl_reid_node]: Consultando al VLM: paciente 'paciente18' (2 ref.) + escena (2 img.), prompt por defecto...
+[qwen3vl_reid_node.py-2] [INFO] [1794419612.556065086] [qwen3vl_reid_node]: ReID [paciente18]:
+[qwen3vl_reid_node.py-2] 1. Lleva sudadera oscura con cuello redondo, pantalones grises claros, y tiene cabello oscuro y rizado, visto desde atrás en ambas imágenes.  
+[qwen3vl_reid_node.py-2] 2. Aparece en Picture 4, sentado en primer plano, a la izquierda de la imagen, con la cabeza inclinada hacia adelante sonriendo.  
+[qwen3vl_reid_node.py-2] 3. VEREDICTO: SÍ, en Picture 4, en la esquina inferior izquierda, sentado frente a la cámara.
+
+
+```
 ## Licencia y autoría
 
 Licencia: Apache-2.0 (añade un fichero `LICENSE` al repositorio).

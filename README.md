@@ -19,9 +19,7 @@ El paquete incluye además herramientas auxiliares independientes del modelo: un
 7. [Parámetros](#parámetros)
 8. [Añadir otro modelo](#añadir-otro-modelo)
 9. [Solución de problemas](#solución-de-problemas)
-10. [Hoja de ruta](#hoja-de-ruta)
-11. [Privacidad y datos](#privacidad-y-datos)
-12. [Licencia y autoría](#licencia-y-autoría)
+10. [Licencia y autoría](#licencia-y-autoría)
 
 ---
 
@@ -348,26 +346,6 @@ Las fotos de alta resolución generan miles de tokens visuales cada una. Baja `m
 
 **La respuesta se corta antes del `VEREDICTO`**
 Sube `max_new_tokens` en `config/qwen3vl.yaml`.
-
----
-
-## Hoja de ruta
-
-- [x] Interfaz con `references` y `scene` separadas, etiquetado `Picture N` en el prompt.
-- [x] Backend Qwen3-VL modularizado y launcher genérico por modelo.
-- [ ] Hacer que `person_detector` publique recortes en `/human_reid/reference` y `/human_reid/crowd` en lugar de guardar solo en disco.
-- [ ] Parametrizar tópicos, ROI y cooldown de `person_detector`.
-- [ ] Reducir/comprimir las imágenes antes de enviarlas por el servicio.
-- [ ] Salida estructurada del VLM (JSON: `match`, `confidence`, `bbox`) y publicación en un tópico de resultado.
-- [ ] Generación determinista (`do_sample=False`) y evaluación con métricas (accuracy, precisión/recall) sobre un conjunto de pruebas.
-- [ ] Segundo backend VLM (ver [Añadir otro modelo](#añadir-otro-modelo)); si el cliente ReID resulta idéntico, extraerlo a un nodo genérico con el prompt por modelo.
-- [ ] Tests básicos.
-
----
-
-## Privacidad y datos
-
-`saved_frames/` y `scene/` contienen fotografías de personas. Si el repositorio es público, asegúrate de contar con el consentimiento de las personas que aparecen o sustitúyelas por imágenes sintéticas/anonimizadas. El `.gitignore` actual no excluye estas carpetas ni los pesos `*.pt` de YOLO: añade `saved_frames/`, `scene/` y `*.pt` si no quieres versionarlos.
 
 ---
 
